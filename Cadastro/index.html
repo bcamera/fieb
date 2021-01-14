@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Cadastro</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+  <div class="container-fluid register-form">
+    <div class="form">
+      <div class="note">
+        <p>Cadastro</p>
+      </div>
+
+      <div class="form-content">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Nome</label>
+              <input id="nome" type="text" class="form-control" value=""/>
+            </div>
+            <div class="form-group">
+              <label>CPF</label>
+              <input id="cpf" type="text" class="form-control" value="" />
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input id="email" type="text" class="form-control" onblur="checarEmail();" value=""/>
+            </div>
+            <div class="form-group">
+              <label>Telefone</label>
+              <input id="telefone" type="text" class="form-control" value=""/>
+            </div>     
+            <div class="form-group">
+              <label>Habilitação</label>
+              <select class="form-control" id="habilitacao">
+                <option value="">Selecione...</option>
+                <option value="sim">Sim</option>
+                <option value="nao">Não</option>
+              </select>                        
+            </div>
+            <div class="form-group">
+             <label>Categoria</label>
+             <input id="categoria" type="text" class="form-control" value=""/>
+           </div>                                                                    
+         </div>
+         <div class="col-md-4">
+          <div class="form-group">
+            <label>Lingua Estrangeira</label>
+            <select class="form-control" id="lingua" multiple>
+              <option value="ingles">Inglês</option>
+              <option value="espanhol">Espanhol</option>
+              <option value="frances">Francês</option>
+            </select>                        
+          </div>
+          <div class="form-group">
+            <label>Estado</label>
+            <input id="estado" type="text" class="form-control" value=""/>
+          </div>
+          <div class="form-group">
+            <label>Cidade</label>
+            <input id="cidade" type="text" class="form-control" value=""/>
+          </div>
+          <div class="form-group">
+            <label>CEP</label>
+            <input id="cep" type="text" class="form-control" value=""/>
+          </div>     
+          <div class="form-group">
+           <label>Logradouro</label>
+           <input id="logradouro" type="text" class="form-control" value=""/>
+         </div>                                                                    
+       </div>
+       <div class="col-md-4">
+        <div class="form-group">
+          <label>Número</label>
+          <input id="numero" type="text" class="form-control" value=""/>
+        </div>
+        <div class="form-group">
+          <label>Complemento</label>
+          <input id="complemento" type="text" class="form-control" value=""/>
+        </div>
+        <div class="form-group">
+          <label>Cargo</label>
+          <input id="cargo" type="text" class="form-control" value=""/>
+        </div>
+        <div class="form-group">
+          <label>Salário Proposto</label>
+          <input id="salario" type="text" class="form-control" value=""/>
+        </div>                                                                      
+      </div>                                                          
+    </div>
+<button type="button" class="btnSubmit">Submit</button>
+  </div>
+
+  <div class="note">
+    <p>Tabela de Horário</p>
+  </div>
+  <div class="form-content">
+  
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Dia de Semana</label>
+        <select class="form-control" id="dia">
+          <option value="">Selecione...</option>
+          <option value="segunda">Segunda</option>
+          <option value="terca">Terça</option>
+          <option value="quarta">Quarta</option>
+          <option value="quinta">Quinta</option>
+          <option value="sexta">Sexta</option>
+        </select>                        
+      </div>
+      <div class="form-group">
+        <label>Hora Início</label>
+        <input id="hora_inicio" type="time" class="form-control" value=""/>
+      </div>
+      <div class="form-group">
+        <label>Hora Fim</label>
+        <input id="hora_fim" type="time" class="form-control" value="" />
+      </div>
+         </div>
+     <div class="col-md-4">    
+      <div class="form-group">
+        <label>Tempo de descanso</label>
+        <input id="tempo" type="number" class="form-control" value=""/>
+      </div>
+      <div class="form-group">
+        <label>Carga horária</label>
+        <input id="carga_horaria" type="text" readonly class="form-control" value=""/>
+      </div>     
+      <div class="form-group">
+       <label>Carga horária semanal</label>
+       <input id="carga_horaria_semanal" type="text" readonly class="form-control" value=""/>
+     </div>                                                                    
+   </div>
+ </div>
+ <button type="button" class="btnSubmit">Submit</button>
+ </div>
+</div>
+</div>
+
+</body>
+<script type="text/javascript" src="js/jquery.mask.js"></script>
+<script type="text/javascript" src="js/javascript.js"></script>
+</html>
