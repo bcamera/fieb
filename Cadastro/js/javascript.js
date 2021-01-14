@@ -5,14 +5,15 @@ $('#salario').mask('00.000,00');
 
 
 $('#hora_inicio').blur(function(){
-
-    console.log($('#hora_fim').val());
-    console.log($('#hora_inicio').val());
+    calcula_carga_horaria();
 })
 
 $('#hora_fim').blur(function(){
-    console.log($('#hora_fim').val());
-    console.log($('#hora_inicio').val());
+    calcula_carga_horaria()
+})
+
+$('#tempo').blur(function(){
+    calcula_carga_horaria()
 })
 
 $('#carga_horaria_semanal').val()
@@ -30,6 +31,39 @@ $('#habilitacao').change(function(){
 });
 
 
+function calcula_carga_horaria(){
+
+    //Hora Inicio    
+    let regExTime = /([0-9]?[0-9]):([0-9][0-9])/;
+    let regExTimeArr = regExTime.exec($('#hora_inicio').val());
+    let timeHr = regExTimeArr[1] * 3600;
+    let timeMin = regExTimeArr[2] * 60;
+    let timeMsInicio = timeHr + timeMin;
+
+
+    //Hora Fim
+    let regExTimeArrFim = regExTime.exec($('#hora_fim').val());
+    let timeHrFim = regExTimeArrFim[1] * 3600;
+    let timeMinFim = regExTimeArrFim[2] * 60;
+    let timeMsFim = timeHrFim + timeMinFim;
+
+
+    //Tempo de Descanso
+    let timeDescanso = $('#tempo').val() * 3600;
+
+    let diff = timeMsFim - timeMsInicio - timeDescanso;
+    console.log(diff);
+    console.log(timeDescanso);
+    let tempo = new Date(diff * 1000).toISOString().substr(11, 2)
+
+    if ( tempo > 10){
+        alert('Tempo superior a 10 horas');
+         $('#carga_horaria').val('');
+    }
+    else{
+        $('#carga_horaria').val(tempo);
+    }
+}
 
 //Estados e Cidades
 $.getJSON('https://servicodados.ibge.gov.br/api/v1/localidades/estados/', function (json) {
@@ -66,6 +100,7 @@ $.getJSON('https://servicodados.ibge.gov.br/api/v1/localidades/estados/', functi
         }
  
     });
+
 
 
  function limpa_formulário_cep() {
