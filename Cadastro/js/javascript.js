@@ -4,16 +4,16 @@ $('#cpf').mask('000.000.000-00');
 $('#salario').mask('00.000,00');
 
 
-$('#hora_inicio').blur(function(){
-    calcula_carga_horaria();
+$('.hora_inicio').blur(function(){
+    calcula_carga_horaria($(this).attr('id'));
 })
 
-$('#hora_fim').blur(function(){
-    calcula_carga_horaria()
+$('.hora_fim').blur(function(){
+    calcula_carga_horaria($(this).attr('id'))
 })
 
-$('#tempo').blur(function(){
-    calcula_carga_horaria()
+$('.tempo').blur(function(){
+    calcula_carga_horaria($(this).attr('id'))
 })
 
 $('#carga_horaria_semanal').val()
@@ -22,7 +22,6 @@ $('#carga_horaria').val()
 $( "#categoria" ).prop( "disabled", true );
 
 $('#habilitacao').change(function(){
-    console.log(this.value);
     if (this.value == 'nao'){
         $( "#categoria" ).prop( "disabled", true );
     }else{
@@ -31,38 +30,41 @@ $('#habilitacao').change(function(){
 });
 
 
-function calcula_carga_horaria(){
+function calcula_carga_horaria(id){
 
+    id = id.slice(-1);
+    console.log(id);
     //Hora Inicio    
     let regExTime = /([0-9]?[0-9]):([0-9][0-9])/;
-    let regExTimeArr = regExTime.exec($('#hora_inicio').val());
+    let regExTimeArr = regExTime.exec($('#hora_inicio_'+id).val());
     let timeHr = regExTimeArr[1] * 3600;
     let timeMin = regExTimeArr[2] * 60;
     let timeMsInicio = timeHr + timeMin;
 
 
     //Hora Fim
-    let regExTimeArrFim = regExTime.exec($('#hora_fim').val());
+    let regExTimeArrFim = regExTime.exec($('#hora_fim_'+id).val());
     let timeHrFim = regExTimeArrFim[1] * 3600;
     let timeMinFim = regExTimeArrFim[2] * 60;
     let timeMsFim = timeHrFim + timeMinFim;
 
 
     //Tempo de Descanso
-    let timeDescanso = $('#tempo').val() * 3600;
+    let timeDescanso = $('#tempo_'+id).val() * 3600;
 
     let diff = timeMsFim - timeMsInicio - timeDescanso;
-    console.log(diff);
-    console.log(timeDescanso);
     let tempo = new Date(diff * 1000).toISOString().substr(11, 2)
 
     if ( tempo > 10){
         alert('Tempo superior a 10 horas');
-         $('#carga_horaria').val('');
+         $('#carga_horaria_'+id).val('');
     }
     else{
-        $('#carga_horaria').val(tempo);
+        $('#carga_horaria_'+id).val(tempo);
     }
+    
+    $('#carga_horaria_semanal').val($('#carga_horaria_1').val()*1+$('#carga_horaria_2').val()*1+$('#carga_horaria_3').val()*1+$('#carga_horaria_4').val()*1+$('#carga_horaria_5').val()*1);
+
 }
 
 //Estados e Cidades
