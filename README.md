@@ -2,4 +2,4 @@
 https://bcamera.github.io/fieb/
 
 ## Questão 2 no arquivo: 
-questaoBanco.sql
+[questaoBanco.sql](https://github.com/bcamera/fieb/blob/main/questaoBanco.sql)
