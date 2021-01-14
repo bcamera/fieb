@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="Cadastro/css/style.css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -61,11 +61,15 @@
           </div>
           <div class="form-group">
             <label>Estado</label>
-            <input id="estado" type="text" class="form-control" value=""/>
+            <select class="form-control" id="estado">
+              <option value="">Selecione...</option>
+            </select>
           </div>
           <div class="form-group">
             <label>Cidade</label>
-            <input id="cidade" type="text" class="form-control" value=""/>
+            <select class="form-control" id="cidade">
+               <option value="">Selecione...</option>
+            </select>
           </div>
           <div class="form-group">
             <label>CEP</label>
@@ -87,7 +91,14 @@
         </div>
         <div class="form-group">
           <label>Cargo</label>
-          <input id="cargo" type="text" class="form-control" value=""/>
+          <select class="form-control" id="cargo">
+            <option value="">Selecione...</option>
+            <option value="suporte">Analista de Suporte</option>
+            <option value="sistema">Analista de Sistemas</option>
+            <option value="web">Desenvolvedor Web</option>
+            <option value="estagiario">Estagiario</option>
+            <option value="gestor">Gestor</option>
+          </select>  
         </div>
         <div class="form-group">
           <label>Salário Proposto</label>
@@ -146,6 +157,6 @@
 </div>
 
 </body>
-<script type="text/javascript" src="js/jquery.mask.js"></script>
-<script type="text/javascript" src="js/javascript.js"></script>
+<script type="text/javascript" src="Cadastro/js/jquery.mask.js"></script>
+<script type="text/javascript" src="Cadastro/js/javascript.js"></script>
 </html>

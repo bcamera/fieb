@@ -18,6 +18,118 @@ $('#hora_fim').blur(function(){
 $('#carga_horaria_semanal').val()
 $('#carga_horaria').val()
 
+$( "#categoria" ).prop( "disabled", true );
+
+$('#habilitacao').change(function(){
+    console.log(this.value);
+    if (this.value == 'nao'){
+        $( "#categoria" ).prop( "disabled", true );
+    }else{
+        $( "#categoria" ).prop( "disabled", false );
+    }
+});
+
+
+
+//Estados e Cidades
+$.getJSON('https://servicodados.ibge.gov.br/api/v1/localidades/estados/', function (json) {
+        var options;
+ 
+        for (var i = 0; i < json.length; i++) {
+ 
+            options += '<option data-id="' + json[i].id + '" value="' + json[i].nome + '" >' + json[i].nome + '</option>';
+        }
+        $('#estado').append(`${options}`)
+ 
+    });
+ 
+ 
+    $('#estado').change(function () {
+        if ($(this).val()) {
+            $.getJSON('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+$(this).find("option:selected").attr('data-id')+'/municipios', {id: $(this).find("option:selected").attr('data-id')}, function (json) {
+ 
+                var options;
+ 
+                for (var i = 0; i < json.length; i++) {
+ 
+                    options += '<option value="' + json[i].nome + '" >' + json[i].nome + '</option>';
+ 
+                }
+                $('#cidade').append(`${options}`)
+ 
+            });
+ 
+        } else {
+            $("#cidade").empty();
+            $('#cidade').append('<option value="">Selecione...</option>');
+ 
+        }
+ 
+    });
+
+
+ function limpa_formulário_cep() {
+                // Limpa valores do formulário de cep.
+                $("#cidade").val("");
+                $("#rua").val("");
+                $("#bairro").val("");
+                $("#complemento").val("");
+            }
+            
+            //Quando o campo cep perde o foco.
+            $("#cep").blur(function() {
+
+                //Nova variável "cep" somente com dígitos.
+                var cep = $(this).val().replace(/\D/g, '');
+
+                //Verifica se campo cep possui valor informado.
+                if (cep != "") {
+
+                    //Expressão regular para validar o CEP.
+                    var validacep = /^[0-9]{8}$/;
+
+                    //Valida o formato do CEP.
+                    if(validacep.test(cep)) {
+
+                        //Preenche os campos com "..." enquanto consulta webservice.
+                        $("#cidade").val("...");
+                        $("#rua").val("...");
+                        $("#bairro").val("...");
+                        $("#complemento").val("...");
+                        //Consulta o webservice viacep.com.br/
+                        $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                            if (!("erro" in dados)) {
+                                console.log(dados)
+                                        //Atualiza os campos com os valores da consulta.
+                                        $("#cidade").val(dados.localidade);
+                                        $("#logradouro").val(dados.logradouro);
+                                        $("#bairro").val(dados.bairro);
+                                        $("#numero").val(dados.numero);
+                                        $("#complemento").val(dados.complemento);
+                             }
+                            else {
+                                //CEP pesquisado não foi encontrado.
+                                limpa_formulário_cep();
+                                alert("CEP não encontrado.");
+                            }
+                        });
+                    } //end if.
+                    else {
+                        //cep é inválido.
+                        limpa_formulário_cep();
+                        $('#cep').val('');
+                        alert("Formato de CEP inválido.");
+                    }
+                } //end if.
+                else {
+                    //cep sem valor, limpa formulário.
+                    limpa_formulário_cep();
+                }
+            });
+
+
+
 function checarEmail(){
 
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
