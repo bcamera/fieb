@@ -91,6 +91,7 @@ $.getJSON('https://servicodados.ibge.gov.br/api/v1/localidades/estados/', functi
                     options += '<option value="' + json[i].nome + '" >' + json[i].nome + '</option>';
  
                 }
+                $("#cidade").empty();
                 $('#cidade').append(`${options}`)
  
             });
